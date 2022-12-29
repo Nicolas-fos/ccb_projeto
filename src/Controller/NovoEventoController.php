@@ -96,32 +96,46 @@ class NovoEventoController extends Controller
     }
 
 
-    public function eventos()
+    public function eventos($request)
     {
 
+        echo $data = filter_input(INPUT_GET, 'data');
+        //exit;
+
         $eventoModel = new EventoModel();
-        $listEvento = $eventoModel->find()->order("id asc")->fetch(true);
+
+
+        $params = http_build_query(["dia" => $data]);
+        if (isset($data) && $data != '') {
+            $eventoModel->find("dia = :dia", $params);
+        } else {
+            $eventoModel->find();
+        }
+
+        $listEvento = $eventoModel->order("id asc")->fetch(true);
 
         $eventos = [];
-        foreach ($listEvento as $key => $item) {
-            # code...
-            
-            $id = $item->id;
-            $dia= $item->dia;
-            $hora = $item->hora;
-            $servico = $item->servico;
-            $comum = $item->comum;
-            $atendente = $item->atendente;
-         
-            $eventos[] = [
-            'id' => $id,
-            'start' => $dia,
-            'hora' => $hora,
-            'title' => $servico,
-            'comum' => $comum,
-            'atendente' => $atendente
-        ];
-    }
+        if ($listEvento) {
+            foreach ($listEvento as $key => $item) {
+                # code...
+
+                $id = $item->id;
+                $dia = $item->dia;
+                $hora = $item->hora;
+                $servico = $item->servico;
+                $comum = $item->comum;
+                $atendente = $item->atendente;
+
+                $eventos[] = [
+                    'id' => $id,
+                    'start' => $dia,
+                    'hora' => $hora,
+                    'title' => $servico,
+                    'comum' => $comum,
+                    'atendente' => $atendente
+                ];
+            }
+        }
 
 
         echo json_encode($eventos);

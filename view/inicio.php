@@ -37,22 +37,24 @@
                     }
                 },
                 headerToolbar: {
-      left: 'prev,next today',
-      center: 'title',
-      right: 'dayGridMonth,timeGridWeek,timeGridDay'
-    },
+                    left: 'prev,next today',
+                    center: 'title',
+                    right: 'dayGridMonth,timeGridWeek,timeGridDay'
+                },
                 buttonText: {
                     today: 'hoje',
                     month: 'mês',
                     week: 'semana',
                     day: 'dia',
-                   
+
                 },
                 select: function(info) {
                     $("#teste").slideDown();
-                  $("#teste").html('');
-                  $("#teste").append("teste");
-    },
+                    $("#teste").html('');
+                    //$("#teste").append(info.startStr);
+                    var data_pesquisa = info.startStr;
+                    listaEventosDia(data_pesquisa);
+                },
                 events: result,
 
             });
@@ -64,7 +66,21 @@
         // requicao ajax
     }
 
-    function exibeCalendario(eventos) {
+    function listaEventosDia(data_evento) {
+
+        var dados =[];
+
+        $.ajax({
+            method: "GET",
+            dataType: "json",
+            url: "<?= URL ?>/evento/list_eventos?data="+data_evento,
+            error: function(result) {
+                console.log('Error', result);
+            }
+        }).done(function(result) {
+
+        })
+
 
     }
 </script>
