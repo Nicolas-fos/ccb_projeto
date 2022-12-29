@@ -1,0 +1,26 @@
+{
+    "name": "mactus/ccb",
+    "description": "Site institucional CCB",
+    "type": "project",
+    "autoload": {
+        "files": [
+            "src/config.php"
+        ],
+        "psr-4": {
+            "APP\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Nicolas",
+            "email": "klinfnicolas@gmail.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {
+        "coffeecode/router": "^1.0",
+        "league/plates": "^3.4",
+        "phpmailer/phpmailer": "^6.6",
+        "coffeecode/datalayer": "^1.1"
+    }
+}

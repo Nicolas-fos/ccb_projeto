@@ -1,0 +1,26 @@
+/* 
+    Created on : 15/05/2019, 17:25:03
+    Author     : Marcelo
+*/
+
+.dv-list-versao{
+    border: 1px solid #CD853F; 
+    background-color: #FFF;
+    margin: 10px 0 20px 0;
+    padding: 0;
+}
+.dv-list-versao .dv-texto{
+    padding: 5px;
+}
+
+.dv-list-versao h2{
+    color: #8B4513; 
+}
+
+.dv-list-versao .footer{
+    /*border: 1px solid #CD853F;*/ 
+    background-color: #CD853F; 
+    color: #FFF; 
+    font-weight: bold;
+    margin: 0;
+}
