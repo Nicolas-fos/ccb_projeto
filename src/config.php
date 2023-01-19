@@ -1,6 +1,5 @@
 <?php 
 
-define("URL","http://localhost/treinamento");
 
 const DATA_LAYER_CONFIG = [
     "driver" => "mysql",
@@ -16,3 +15,16 @@ const DATA_LAYER_CONFIG = [
         PDO::ATTR_CASE => PDO::CASE_NATURAL
     ]
 ];
+
+function getUrlSistema()
+{
+    $url = sprintf(
+        "%s://%s%s",
+        isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off' ? 'https' : 'http',
+        $_SERVER['SERVER_NAME'],
+        $_SERVER['CONTEXT_PREFIX']
+    );
+
+    return $url;
+}
+define("URL", getUrlSistema()."/treinamento");

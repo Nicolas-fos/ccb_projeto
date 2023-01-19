@@ -31,7 +31,7 @@ class NovoEventoController extends Controller
         $servicosModel = new ServicosModel();
         $listServicos = $servicosModel->find()->order("nome asc")->fetch(true);
 
-        echo $this->templates->render('novo_evento', ['listComuns' => $listComuns, 'listParticipantes' => $listParticipantes, 'listServicos' => $listServicos]);
+        echo $this->templates->render('novo_evento', ['listComuns' => $listComuns, 'listServicos' => $listServicos]);
     }
 
 
@@ -39,24 +39,25 @@ class NovoEventoController extends Controller
     {
         header('Content-Type: application/json; charset=utf-8');
         $request = $_POST;
+        
+            $this->modelNovoEvento->id = $request['id'];
+            $this->modelNovoEvento->dia = $request['dia'];
+            $this->modelNovoEvento->hora = $request['hora'];
+            $this->modelNovoEvento->servico = $request['servico'];
+            $this->modelNovoEvento->comum = $request['comum'];
+            $this->modelNovoEvento->atendente = $request['atendente'];
+            $this->modelNovoEvento->save();
 
-        $this->modelNovoEvento->id = $request['id'];
-        $this->modelNovoEvento->dia = $request['dia'];
-        $this->modelNovoEvento->hora = $request['hora'];
-        $this->modelNovoEvento->servico = $request['servico'];
-        $this->modelNovoEvento->comum = $request['comum'];
-        $this->modelNovoEvento->atendente = $request['atendente'];
-        $this->modelNovoEvento->save();
+            $this->message = "Registro salvo com sucesso!";
 
-        $this->message = "Registro salvo com sucesso!";
+            if ($this->modelNovoEvento->fail()) {
+                $this->isError = true;
+                $this->code = 400;
+                $this->message = $this->modelNovoEvento->fail()->getMessage();
+            }
 
-        if ($this->modelNovoEvento->fail()) {
-            $this->isError = true;
-            $this->code = 400;
-            $this->message = $this->modelNovoEvento->fail()->getMessage();
-        }
-
-        $this->getMessage();
+            $this->getMessage();
+        
     }
 
     public function excluir($data)
@@ -77,17 +78,6 @@ class NovoEventoController extends Controller
         $this->getMessage();
     }
 
-    public function lista()
-    {
-        header('Content-Type: application/json; charset=utf-8');
-        $listaParticipantes = [];
-        foreach ($this->modelParticipanes->find()->fetch(true) as $key => $item) {
-            array_push($listaParticipantes, $item->data);
-        }
-
-        echo json_encode($listaParticipantes);
-    }
-
     public function listaById($data)
     {
         header('Content-Type: application/json; charset=utf-8');
@@ -99,8 +89,7 @@ class NovoEventoController extends Controller
     public function eventos($request)
     {
 
-        echo $data = filter_input(INPUT_GET, 'data');
-        //exit;
+        $data = filter_input(INPUT_GET, 'data');
 
         $eventoModel = new EventoModel();
 
@@ -113,18 +102,21 @@ class NovoEventoController extends Controller
         }
 
         $listEvento = $eventoModel->order("id asc")->fetch(true);
-
+        $enderecoModel = new ComunsModel();
+        $listEndereco = $enderecoModel->order("id asc")->fetch(true);
         $eventos = [];
         if ($listEvento) {
             foreach ($listEvento as $key => $item) {
                 # code...
 
+               
                 $id = $item->id;
                 $dia = $item->dia;
                 $hora = $item->hora;
                 $servico = $item->servico;
                 $comum = $item->comum;
                 $atendente = $item->atendente;
+                 $listlocal = $listEndereco->data->endereco;
 
                 $eventos[] = [
                     'id' => $id,
@@ -132,7 +124,8 @@ class NovoEventoController extends Controller
                     'hora' => $hora,
                     'title' => $servico,
                     'comum' => $comum,
-                    'atendente' => $atendente
+                    'atendente' => $atendente,
+                    'endereco' => $listlocal
                 ];
             }
         }
