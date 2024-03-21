@@ -27,4 +27,4 @@ function getUrlSistema()
 
     return $url;
 }
-define("URL", getUrlSistema()."/treinamento");
+define("URL", getUrlSistema()."/ccb");

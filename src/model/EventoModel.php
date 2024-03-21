@@ -8,7 +8,7 @@ class EventoModel extends DataLayer{
 
     public function __construct()
     {
-        parent::__construct("novo_evento", ["dia","hora","servico","comum","atendente"],"id", false);
+        parent::__construct("evento", ["dia","hora","servico","comum","atendente"],"id", false);
     }
 
 }

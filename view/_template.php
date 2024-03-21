@@ -57,6 +57,7 @@
 	<script src="<?= URL ?>/node_modules/jquery/dist/jquery.min.js"></script>
 	<script src="<?= URL ?>/node_modules/jquery.growl/javascripts/jquery.growl.js"></script>
 	<script src="<?= URL ?>/js/jquery-ui.js"></script>
+	<script src="<?= URL ?>/js/funcoes_novoevento.js"></script>
 	<script src="<?= URL ?>/js/datepicker-pt-BR.js"></script>
 	<script src="<?= URL ?>/node_modules/jquery-validation/dist/jquery.validate.min.js"></script>
 	<script src="<?= URL ?>/node_modules/popper.js/dist/umd/popper.min.js"></script>

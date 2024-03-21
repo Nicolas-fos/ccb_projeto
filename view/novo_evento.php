@@ -60,7 +60,7 @@ $this->layout('_template') ?>
                 </div><br>
                 <div class="form-row">
                     <button type="button" id="bt-salvar" style="border-radius: 5px; padding: 10px;font-size: 15px;">salvar</button>
-                    <button type="button" onclick="javascript: resetRequenteInputs()" id="bt-cancelar" style="border-radius: 5px; padding: 10px;font-size: 15px;margin-left: 10px;">Cancelar</button>
+                    <button type="button" id="bt-cancelar" style="border-radius: 5px; padding: 10px;font-size: 15px;margin-left: 10px;">Cancelar</button>
                 </div>
             </form>
 
@@ -86,6 +86,10 @@ $this->layout('_template') ?>
 
         $('#bt-salvar').click(function() {
             salvar();
+        });
+        $('#bt-cancelar').click(function() {
+            resetRequenteInputs();
+            $('#frm-dados').slideUp();
         });
 
         $("#frm-dados").validate({
@@ -195,6 +199,8 @@ $this->layout('_template') ?>
                     html += `<td>${item.hora}</td>`;
                     html += `<td>${item.comum}</td>`;
                     html += `<td>${item.atendente}</td>`;
+                    html += `<td>${item.id}</td>`;
+                    html += `<td>${item.id}</td>`;
                   
                 });
             }
@@ -218,10 +224,10 @@ $this->layout('_template') ?>
         var formArray = $('#frm-dados').serialize();
         if ($("#frm-dados").validate().form()) {
             $.ajax({
-                method: "post",
+                method: "POST",
                 data: formArray,
                 dataType: "json",
-                url: "novo_evento/salvar",
+                url: "<?= URL ?>/novo_evento/salvar",
                 error: function(result) {
                     exibeAlert(result.responseJSON.message, true);
                 }
