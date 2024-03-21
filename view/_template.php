@@ -10,6 +10,7 @@
 
 	<!-- CSS Files -->
 	<link rel="stylesheet" href="<?= URL ?>/node_modules/bootstrap/dist/css/bootstrap.min.css">
+	<link rel="stylesheet" href="<?= URL ?>/node_modules/bootstrap-icons/font/bootstrap-icons.min.css">
 	<link rel="stylesheet" href="<?= URL ?>/node_modules/jquery.growl/stylesheets/jquery.growl.css">
 	<link rel="stylesheet" href="<?= URL ?>/css/jquery-ui.css">
 	<link href="<?= URL ?>/node_modules/summernote/dist/summernote-bs4.css" rel="stylesheet">
@@ -55,6 +56,9 @@
 	</div>
 	<!-- Javascript files-->
 	<script src="<?= URL ?>/node_modules/jquery/dist/jquery.min.js"></script>
+	<script src="<?= URL ?>/node_modules/jquery-ui/dist/jquery-ui.min.js"></script>
+	<script src="<?= URL ?>/node_modules/jquery-ui/dist/jquery-ui.js"></script>
+	<script src="<?= URL ?>/js/moment.min.js" type="text/javascript"></script>
 	<script src="<?= URL ?>/node_modules/jquery.growl/javascripts/jquery.growl.js"></script>
 	<script src="<?= URL ?>/js/jquery-ui.js"></script>
 	<script src="<?= URL ?>/js/funcoes_novoevento.js"></script>
